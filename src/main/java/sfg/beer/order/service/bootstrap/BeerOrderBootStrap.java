@@ -1,5 +1,6 @@
 package sfg.beer.order.service.bootstrap;
 
+import lombok.extern.slf4j.Slf4j;
 import sfg.beer.order.service.domain.Customer;
 import sfg.beer.order.service.repositories.CustomerRepository;
 import lombok.RequiredArgsConstructor;
@@ -8,9 +9,9 @@ import org.springframework.stereotype.Component;
 
 import java.util.UUID;
 
-/**
- * Created by jt on 2019-06-06.
- */
+
+
+@Slf4j
 @RequiredArgsConstructor
 @Component
 public class BeerOrderBootStrap implements CommandLineRunner {
@@ -28,10 +29,13 @@ public class BeerOrderBootStrap implements CommandLineRunner {
 
     private void loadCustomerData() {
         if (customerRepository.count() == 0) {
-            customerRepository.save(Customer.builder()
+            Customer savedCustomer = customerRepository.save(Customer.builder()
                     .customerName(TASTING_ROOM)
                     .apiKey(UUID.randomUUID())
                     .build());
+
+            log.debug("Testing Room Customer Id: " + savedCustomer.getId().toString());
+            System.out.println("Testing Room Customer Id: " + savedCustomer.getId().toString());
         }
     }
 }
