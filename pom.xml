@@ -14,7 +14,11 @@
     <description>MSSC Beer Order Service</description>
 
     <dependencies>
-
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-jms</artifactId>
+            <version>6.0.9</version>
+        </dependency>
     </dependencies>
 
 </project>
