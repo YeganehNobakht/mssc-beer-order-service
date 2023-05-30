@@ -26,6 +26,6 @@ public class BeerOrderStateMachine extends StateMachineConfigurerAdapter<BeerOrd
                 .end(BeerOrderStatusEnum.DELIVERED)
                 .end(BeerOrderStatusEnum.DELIVERY_EXCEPTION)
                 .end(BeerOrderStatusEnum.VALIDATION_EXCEPTION)
-                .end(BeerOrderStatusEnum.ALLOCATION_EXCEPTION)
+                .end(BeerOrderStatusEnum.ALLOCATION_EXCEPTION);
     }
 }

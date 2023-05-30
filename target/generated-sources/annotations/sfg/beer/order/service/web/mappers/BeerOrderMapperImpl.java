@@ -16,7 +16,6 @@ import sfg.beer.order.service.domain.Customer;
 import sfg.beer.order.service.web.model.BeerOrderDto;
 import sfg.beer.order.service.web.model.BeerOrderDto.BeerOrderDtoBuilder;
 import sfg.beer.order.service.web.model.BeerOrderLineDto;
-import sfg.beer.order.service.web.model.OrderStatusEnum;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
