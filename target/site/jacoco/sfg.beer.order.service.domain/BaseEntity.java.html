@@ -52,7 +52,7 @@ public class BaseEntity {
             strategy = &quot;org.hibernate.id.UUIDGenerator&quot;
     )
     @Type(type=&quot;org.hibernate.type.UUIDCharType&quot;)
-    @Column(length = 36, columnDefinition = &quot;varchar&quot;, updatable = false, nullable = false )
+    @Column(length = 36, columnDefinition = &quot;varchar(36)&quot;, updatable = false, nullable = false )
 <span class="fc" id="L56">    private UUID id;</span>
 
     @Version

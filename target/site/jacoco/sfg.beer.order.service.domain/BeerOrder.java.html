@@ -42,7 +42,7 @@ public class BeerOrder extends BaseEntity {
 
 <span class="nc" id="L43">    @Builder</span>
     public BeerOrder(UUID id, Long version, Timestamp createdDate, Timestamp lastModifiedDate, String customerRef, Customer customer,
-                     Set&lt;BeerOrderLine&gt; beerOrderLines, OrderStatusEnum orderStatus,
+                     Set&lt;BeerOrderLine&gt; beerOrderLines, BeerOrderStatusEnum orderStatus,
                      String orderStatusCallbackUrl) {
 <span class="nc" id="L47">        super(id, version, createdDate, lastModifiedDate);</span>
 <span class="nc" id="L48">        this.customerRef = customerRef;</span>
@@ -61,7 +61,7 @@ public class BeerOrder extends BaseEntity {
     @Fetch(FetchMode.JOIN)
 <span class="nc" id="L62">    private Set&lt;BeerOrderLine&gt; beerOrderLines;</span>
 
-<span class="pc" id="L64">    private OrderStatusEnum orderStatus = OrderStatusEnum.NEW;</span>
+<span class="pc" id="L64">    private BeerOrderStatusEnum orderStatus = BeerOrderStatusEnum.NEW;</span>
 <span class="nc" id="L65">    private String orderStatusCallbackUrl;</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.3.201901230119</span></div></body></html>

@@ -18,8 +18,8 @@
 package sfg.beer.order.service.services;
 
 import sfg.beer.order.service.domain.BeerOrder;
+import sfg.beer.order.service.domain.BeerOrderStatusEnum;
 import sfg.beer.order.service.domain.Customer;
-import sfg.beer.order.service.domain.OrderStatusEnum;
 import sfg.beer.order.service.repositories.BeerOrderRepository;
 import sfg.beer.order.service.repositories.CustomerRepository;
 import sfg.beer.order.service.web.mappers.BeerOrderMapper;
@@ -84,7 +84,7 @@ public class BeerOrderServiceImpl implements BeerOrderService {
 <span class="nc" id="L84">            BeerOrder beerOrder = beerOrderMapper.dtoToBeerOrder(beerOrderDto);</span>
 <span class="nc" id="L85">            beerOrder.setId(null); //should not be set by outside client</span>
 <span class="nc" id="L86">            beerOrder.setCustomer(customerOptional.get());</span>
-<span class="nc" id="L87">            beerOrder.setOrderStatus(OrderStatusEnum.NEW);</span>
+<span class="nc" id="L87">            beerOrder.setOrderStatus(BeerOrderStatusEnum.NEW);</span>
 
 <span class="nc" id="L89">            beerOrder.getBeerOrderLines().forEach(line -&gt; line.setBeerOrder(beerOrder));</span>
 
@@ -109,7 +109,7 @@ public class BeerOrderServiceImpl implements BeerOrderService {
     @Override
     public void pickupOrder(UUID customerId, UUID orderId) {
 <span class="nc" id="L111">        BeerOrder beerOrder = getOrder(customerId, orderId);</span>
-<span class="nc" id="L112">        beerOrder.setOrderStatus(OrderStatusEnum.PICKED_UP);</span>
+<span class="nc" id="L112">        beerOrder.setOrderStatus(BeerOrderStatusEnum.PICKED_UP);</span>
 
 <span class="nc" id="L114">        beerOrderRepository.save(beerOrder);</span>
 <span class="nc" id="L115">    }</span>
