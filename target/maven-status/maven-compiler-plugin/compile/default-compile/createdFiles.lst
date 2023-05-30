@@ -15,6 +15,7 @@ sfg\beer\order\service\web\mappers\BeerOrderMapper.class
 sfg\beer\order\service\web\model\OrderStatusUpdate.class
 sfg\beer\order\service\web\model\BeerDto$BeerDtoBuilder.class
 sfg\beer\order\service\services\beerService\BeerServiceImpl.class
+sfg\beer\order\service\stateMachine\BeerOrderStateMachine.class
 sfg\beer\order\service\web\mappers\BeerOrderLineMapperImpl_.class
 sfg\beer\order\service\config\TaskConfig.class
 sfg\beer\order\service\domain\BeerOrderLine$BeerOrderLineBuilder.class

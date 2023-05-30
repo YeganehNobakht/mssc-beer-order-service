@@ -1,5 +1,6 @@
 GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
 mssc-beer-order-service,sfg.beer.order.service.services.beerService,BeerServiceImpl,27,11,0,0,2,5,2,2,2,2
+mssc-beer-order-service,sfg.beer.order.service.stateMachine,BeerOrderStateMachine,3,0,0,0,1,0,1,0,1,0
 mssc-beer-order-service,sfg.beer.order.service,BeerOrderServiceApplication,5,3,0,0,2,1,1,1,1,1
 mssc-beer-order-service,sfg.beer.order.service.web.model,BeerOrderDto,268,0,48,0,16,0,41,0,17,0
 mssc-beer-order-service,sfg.beer.order.service.web.model,CustomerDto.CustomerDtoBuilder,54,0,0,0,1,0,8,0,8,0

@@ -9,6 +9,7 @@ D:\java\microservice\AA-Codes\mssc-beer-order-service\src\main\java\sfg\beer\ord
 D:\java\microservice\AA-Codes\mssc-beer-order-service\src\main\java\sfg\beer\order\service\domain\BaseEntity.java
 D:\java\microservice\AA-Codes\mssc-beer-order-service\src\main\java\sfg\beer\order\service\web\model\BeerOrderPagedList.java
 D:\java\microservice\AA-Codes\mssc-beer-order-service\src\main\java\sfg\beer\order\service\BeerOrderServiceApplication.java
+D:\java\microservice\AA-Codes\mssc-beer-order-service\src\main\java\sfg\beer\order\service\stateMachine\BeerOrderStateMachine.java
 D:\java\microservice\AA-Codes\mssc-beer-order-service\src\main\java\sfg\beer\order\service\web\mappers\BeerOrderMapper.java
 D:\java\microservice\AA-Codes\mssc-beer-order-service\src\main\java\sfg\beer\order\service\domain\BeerOrder.java
 D:\java\microservice\AA-Codes\mssc-beer-order-service\src\main\java\sfg\beer\order\service\services\TastingRoomService.java
