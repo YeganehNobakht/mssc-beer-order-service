@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>BeerOrder.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">mssc-beer-order-service</a> &gt; <a href="index.source.html" class="el_package">come.bmc.sfg.beer.order.service.domain</a> &gt; <span class="el_source">BeerOrder.java</span></div><h1>BeerOrder.java</h1><pre class="source lang-java linenums">package come.bmc.sfg.beer.order.service.domain;
+
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import java.sql.Timestamp;
+import java.util.Set;
+import java.util.UUID;
+
+@Getter
+<span class="nc" id="L19">@Setter</span>
+@Entity
+<span class="fc" id="L21">@NoArgsConstructor</span>
+public class BeerOrder extends BaseEntity {
+
+<span class="nc" id="L24">    @Builder</span>
+    public BeerOrder(UUID id, Long version, Timestamp createdDate, Timestamp lastModifiedDate, String customerRef, Customer customer,
+                     Set&lt;BeerOrderLine&gt; beerOrderLines, BeerOrderStatusEnum orderStatus,
+                     String orderStatusCallbackUrl) {
+<span class="nc" id="L28">        super(id, version, createdDate, lastModifiedDate);</span>
+<span class="nc" id="L29">        this.customerRef = customerRef;</span>
+<span class="nc" id="L30">        this.customer = customer;</span>
+<span class="nc" id="L31">        this.beerOrderLines = beerOrderLines;</span>
+<span class="nc" id="L32">        this.orderStatus = orderStatus;</span>
+<span class="nc" id="L33">        this.orderStatusCallbackUrl = orderStatusCallbackUrl;</span>
+<span class="nc" id="L34">    }</span>
+
+<span class="nc" id="L36">    private String customerRef;</span>
+
+    @ManyToOne
+<span class="nc" id="L39">    private Customer customer;</span>
+
+    @OneToMany(mappedBy = &quot;beerOrder&quot;, cascade = CascadeType.ALL)
+    @Fetch(FetchMode.JOIN)
+<span class="nc" id="L43">    private Set&lt;BeerOrderLine&gt; beerOrderLines;</span>
+
+<span class="pc" id="L45">    private BeerOrderStatusEnum orderStatus = BeerOrderStatusEnum.NEW;</span>
+<span class="nc" id="L46">    private String orderStatusCallbackUrl;</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.3.201901230119</span></div></body></html>
