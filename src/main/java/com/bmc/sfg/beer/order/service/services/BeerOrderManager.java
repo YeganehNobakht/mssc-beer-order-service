@@ -3,6 +3,8 @@ package com.bmc.sfg.beer.order.service.services;
 import com.bmc.sfg.beer.order.service.domain.BeerOrder;
 import com.bmc.sfg.brewery.model.BeerOrderDto;
 
+import java.util.UUID;
+
 /**
  * @author Masoumeh Yeganeh
  * @created 30/05/2023
@@ -10,6 +12,9 @@ import com.bmc.sfg.brewery.model.BeerOrderDto;
 public interface BeerOrderManager {
 
     BeerOrder newBeerOrder(BeerOrder beerOrder);
+
+    @org.springframework.transaction.annotation.Transactional
+    void processValidationResult(UUID beerOrderId, Boolean isValid);
 
     void beerOrderAllocationPassed(BeerOrderDto beerOrderDto);
 
