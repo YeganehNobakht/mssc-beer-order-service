@@ -13,6 +13,8 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.jenspiegsa.wiremockextension.WireMockExtension;
 import com.github.tomakehurst.wiremock.WireMockServer;
+import org.awaitility.Awaitility;
+import org.awaitility.Duration;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -23,12 +25,15 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.jms.core.JmsTemplate;
 
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.UUID;
+import java.util.concurrent.TimeUnit;
 
 import static com.github.jenspiegsa.wiremockextension.ManagedWireMockServer.with;
 import static com.github.tomakehurst.wiremock.client.WireMock.get;
 import static com.github.tomakehurst.wiremock.client.WireMock.okJson;
 import static com.github.tomakehurst.wiremock.core.WireMockConfiguration.wireMockConfig;
+import static org.awaitility.Awaitility.await;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
@@ -62,7 +67,7 @@ public class BeerOrderManagerImplIT {
     @TestConfiguration
     static class RestTemplateBuilderProvider {
         @Bean(destroyMethod = "stop")
-        public WireMockServer wireMockServer(){
+        public WireMockServer wireMockServer() {
             WireMockServer server = with(wireMockConfig().port(8083));
             server.start();
             return server;
@@ -77,7 +82,7 @@ public class BeerOrderManagerImplIT {
     }
 
     @Test
-    void testNewToAllocated() throws JsonProcessingException {
+    void testNewToAllocated() throws JsonProcessingException, InterruptedException {
         BeerDto beerDto = BeerDto.builder().id(beerId).upc("12345").build();
 
         wireMockServer.stubFor(get(BeerServiceImpl.BEER_UPC_PATH_V1 + "12345")
@@ -86,6 +91,15 @@ public class BeerOrderManagerImplIT {
         BeerOrder beerOrder = createBeerOrder();
 
         BeerOrder saveBeerOrder = beerOrderManager.newBeerOrder(beerOrder);
+
+        Thread.sleep(10000);
+//        await().untilAsserted( () -> {
+//            BeerOrder foundOrder = beerOrderRepository.findById(beerOrder.getId()).get();
+//
+//            assertEquals(BeerOrderStatusEnum.ALLOCATION_PENDING, foundOrder.getOrderStatus());
+//        });
+
+        saveBeerOrder = beerOrderRepository.findById(saveBeerOrder.getId()).get();
 
         System.out.println("#################" + saveBeerOrder.getOrderStatus().name());
         assertNotNull(saveBeerOrder);
