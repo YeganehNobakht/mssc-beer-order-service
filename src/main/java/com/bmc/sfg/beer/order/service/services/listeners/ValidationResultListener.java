@@ -26,6 +26,7 @@ public class ValidationResultListener {
         final UUID beerOrderId = result.getOrderId();
 
         log.debug("Validation Result for Order Id: " + beerOrderId);
+        System.out.println("in validation result listener");
 
         beerOrderManager.processValidationResult(beerOrderId, result.getIsValid());
     }

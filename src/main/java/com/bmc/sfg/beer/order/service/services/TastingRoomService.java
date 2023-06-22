@@ -22,14 +22,11 @@ public class TastingRoomService {
 
     private final CustomerRepository customerRepository;
     private final BeerOrderService beerOrderService;
-    private final BeerOrderRepository beerOrderRepository;
     private final List<String> beerUpcs = new ArrayList<>(3);
 
-    public TastingRoomService(CustomerRepository customerRepository, BeerOrderService beerOrderService,
-                              BeerOrderRepository beerOrderRepository) {
+    public TastingRoomService(CustomerRepository customerRepository, BeerOrderService beerOrderService) {
         this.customerRepository = customerRepository;
         this.beerOrderService = beerOrderService;
-        this.beerOrderRepository = beerOrderRepository;
 
         beerUpcs.add(BeerOrderBootStrap.BEER_1_UPC);
         beerUpcs.add(BeerOrderBootStrap.BEER_2_UPC);

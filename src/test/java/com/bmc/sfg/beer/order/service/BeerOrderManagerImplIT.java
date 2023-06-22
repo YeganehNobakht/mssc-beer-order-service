@@ -93,17 +93,26 @@ public class BeerOrderManagerImplIT {
         BeerOrder saveBeerOrder = beerOrderManager.newBeerOrder(beerOrder);
 
 //        Thread.sleep(10000);
+
+        Awaitility.setDefaultTimeout(Duration.ONE_MINUTE);
         await().untilAsserted( () -> {
             BeerOrder foundOrder = beerOrderRepository.findById(beerOrder.getId()).get();
 
+//            todo: allocated status
             assertEquals(BeerOrderStatusEnum.ALLOCATION_PENDING, foundOrder.getOrderStatus());
+        });
+//        make sure that this allocated quantity does in fact get updated:
+        await().untilAsserted(() ->{
+            BeerOrder foundOrder = beerOrderRepository.findById(beerOrder.getId()).get();
+            BeerOrderLine line = foundOrder.getBeerOrderLines().iterator().next();
+            assertEquals(line.getOrderQuantity(), line.getQuantityAllocated());
         });
 
         saveBeerOrder = beerOrderRepository.findById(saveBeerOrder.getId()).get();
 
         System.out.println("#################" + saveBeerOrder.getOrderStatus().name());
         assertNotNull(saveBeerOrder);
-        assertEquals(BeerOrderStatusEnum.ALLOCATED, saveBeerOrder.getOrderStatus().name());
+        assertEquals(BeerOrderStatusEnum.ALLOCATED, saveBeerOrder.getOrderStatus());
     }
 
     public BeerOrder createBeerOrder() {
