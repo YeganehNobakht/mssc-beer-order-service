@@ -98,7 +98,6 @@ public class BeerOrderManagerImplIT {
         await().untilAsserted( () -> {
             BeerOrder foundOrder = beerOrderRepository.findById(beerOrder.getId()).get();
 
-//            todo: allocated status
             assertEquals(BeerOrderStatusEnum.ALLOCATION_PENDING, foundOrder.getOrderStatus());
         });
 //        make sure that this allocated quantity does in fact get updated:
@@ -113,6 +112,27 @@ public class BeerOrderManagerImplIT {
         System.out.println("#################" + saveBeerOrder.getOrderStatus().name());
         assertNotNull(saveBeerOrder);
         assertEquals(BeerOrderStatusEnum.ALLOCATED, saveBeerOrder.getOrderStatus());
+    }
+
+    @Test
+    void testFaileValidation() throws JsonProcessingException, InterruptedException {
+        BeerDto beerDto = BeerDto.builder().id(beerId).upc("12345").build();
+
+        wireMockServer.stubFor(get(BeerServiceImpl.BEER_UPC_PATH_V1 + "12345")
+                .willReturn(okJson(objectMapper.writeValueAsString(beerDto))));
+
+        BeerOrder beerOrder = createBeerOrder();
+
+        BeerOrder saveBeerOrder = beerOrderManager.newBeerOrder(beerOrder);
+
+//        Thread.sleep(10000);
+
+        Awaitility.setDefaultTimeout(Duration.ONE_MINUTE);
+        await().untilAsserted(() -> {
+            BeerOrder foundOrder = beerOrderRepository.findById(beerOrder.getId()).get();
+
+            assertEquals(BeerOrderStatusEnum.ALLOCATION_PENDING, foundOrder.getOrderStatus());
+        });
     }
 
     public BeerOrder createBeerOrder() {
