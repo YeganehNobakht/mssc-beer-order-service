@@ -122,16 +122,15 @@ public class BeerOrderManagerImplIT {
                 .willReturn(okJson(objectMapper.writeValueAsString(beerDto))));
 
         BeerOrder beerOrder = createBeerOrder();
+        beerOrder.setCustomerRef("fail-validation");
 
         BeerOrder saveBeerOrder = beerOrderManager.newBeerOrder(beerOrder);
-
-//        Thread.sleep(10000);
 
         Awaitility.setDefaultTimeout(Duration.ONE_MINUTE);
         await().untilAsserted(() -> {
             BeerOrder foundOrder = beerOrderRepository.findById(beerOrder.getId()).get();
 
-            assertEquals(BeerOrderStatusEnum.ALLOCATION_PENDING, foundOrder.getOrderStatus());
+            assertEquals(BeerOrderStatusEnum.VALIDATION_EXCEPTION, foundOrder.getOrderStatus());
         });
     }
 
