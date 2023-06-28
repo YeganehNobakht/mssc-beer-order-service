@@ -3,6 +3,7 @@ package com.bmc.sfg.beer.order.service.services.beerService;
 import com.bmc.sfg.brewery.model.BeerDto;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.web.client.RestTemplateBuilder;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -14,10 +15,11 @@ import java.util.UUID;
  * @created 15/05/2023
  */
 
+@Profile("!local-discovery")
 @Service
 @ConfigurationProperties(prefix = "sfg.brewery", ignoreUnknownFields = false)
 public class BeerServiceImpl implements BeerService {
-    public final static String BEER_PATH_V1 = "/api/v1/beer/";
+    protected final static String BEER_PATH_V1 = "/api/v1/beer/";
     public final static String BEER_UPC_PATH_V1 = "/api/v1/beerUpc/";
     private final RestTemplate restTemplate;
 
