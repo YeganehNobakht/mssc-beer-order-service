@@ -1,5 +1,6 @@
 package com.bmc.sfg.beer.order.service.services.beerService;
 
+import com.bmc.sfg.beer.order.service.config.FeignClientConfig;
 import com.bmc.sfg.brewery.model.BeerDto;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.ResponseEntity;
@@ -12,7 +13,7 @@ import java.util.UUID;
  * @author Masoumeh Yeganeh
  * @created 27/06/2023
  */
-@FeignClient(name = "beer-service")
+@FeignClient(name = "beer-service",configuration = FeignClientConfig.class)
 public interface BeerServiceFeignClient {
 
     @GetMapping("/api/v1/beer/{beerId}")
